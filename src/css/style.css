@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #D4E7F3;
+    color: #000000;
+    font-family: "Montserrat", serif;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+.header {
+    background-color: black;
+    padding: 20px;
+    font-weight: 600;
+}
+
+
+.container {
+  height: 550px;
+  width: 900px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container form {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  width: 100%;
+}
+
+.container form input {
+  background-color: #ebeced;
+  padding-left: 20px;
+  padding-right: 50px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-family: "Montserrat", serif;
+  font-weight: 300;
+  border: 0;
+  margin:10px;
+  outline: none;
+  border-radius: 15px;
+  
+}
+
+.container form label {
+  color: #000000;
+  font-family: "Montserrat", serif;
+  font-weight: 400;
+  margin: 5px;
+}
+
+.container form button {
+  padding-left: 90px;
+  padding-right: 90px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: "Montserrat", serif;
+  font-weight: 600;
+  color: #ffffff;
+  border: 0;
+  background-color: #FF9D00;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 30px;
+  transition: transform 500ms ease;
+}
+
+.container  h1 {
+  color: #000000;
+  font-family: "Montserrat", serif;
+  font-weight: 600;
+  margin: 10px;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+}
+
+.container  h3 {
+  color: #000000;
+  font-family: "Montserrat", serif;
+  font-weight: 450;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.container form button:hover {
+  transform: scale(1.1);
+}
+
+.name-surname {
+  display: flex;
+  gap: 15px; 
+  align-items: center; 
+  max-width: 700px;
+  justify-content: center; 
+  
+}
+
+.name-surname label {
+  color: #000000;
+  font-family: "Montserrat", serif;
+  font-weight: 400;
+  margin: 10px;
+}
+
+.requiredMark{
+    color: #c50b0b;
+}
+
+.organisation-container input{
+    margin: 15px;
+}
+
+.organisation-container button{
+    margin-top: 30px;
+}
+
+.role-selection-form { 
+    display: inline-block; 
+    justify-content: center;
+    margin-top: 120px; 
+} 
+
+.role-option { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    padding: 50px; 
+} 
+
+.role-option form { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 20px;
+} 
+
+.role-option button { 
+    margin-top: 20px;
+    padding: 10px 20px; 
+    background-color: #4CAF50; 
+    color: white; border: none; 
+    border-radius: 5px; cursor: pointer; 
+    } 
+    
+
+    .auth-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      height: 100vh;
+  }
+  
+  .form-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 15px;
+  }
+  
+  .form-group label {
+      color: #000000;
+      font-family: "Montserrat", serif;
+      font-weight: 400;
+      margin-bottom: 5px;
+  }
+  
+  .form-group input {
+      background-color: #ebeced;
+      padding: 15px 50px 15px 20px;
+      font-family: "Montserrat", serif;
+      font-weight: 300;
+      border: 0;
+      outline: none;
+      border-radius: 15px;
+  }
+  
+  .button-container {
+      margin-top: 20px;
+  }
+  
+  button {
+      padding: 10px 90px;
+      font-family: "Montserrat", serif;
+      font-weight: 600;
+      color: #ffffff;
+      border: 0;
+      background-color: #FF9D00;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: transform 500ms ease;
+  }
+  
+  button:hover {
+      transform: scale(1.05);
+  }
+  
+  .links {
+      margin-top: 15px;
+  }
+  
+  .links a {
+      color: #007BFF;
+      text-decoration: none;
+  }
+  
+  .links a:hover {
+      text-decoration: underline;
+  }
+  

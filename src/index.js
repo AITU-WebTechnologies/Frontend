@@ -1,8 +1,8 @@
 import React from "react"
 import ReactDOMClient from "react-dom/client"
-import Registration from './Registration'
+import App from './App'
 import './css/style.css'
 
 const app = ReactDOMClient.createRoot(document.getElementById("test"))
 
-app.render(<Registration/>)
+app.render(<App/>)

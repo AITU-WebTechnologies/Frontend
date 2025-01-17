@@ -1,5 +1,5 @@
 import React from 'react';
-import LeftSlidebarChecker from './leftSlidebarChecker';
+import LeftSlidebar from "./leftSlidebar";
 import axiosInstance from "../configurations/instance";
 import withNavigation from "../utils/withNavigation";
 
@@ -39,7 +39,7 @@ class OrganisationProfile extends React.Component {
       <div className="creating-page">
         <header className="main-header"></header>
         <div className="profile-page">
-          <LeftSlidebarChecker />
+          <LeftSlidebar />
           <div className="content">
             <h1>Профиль компании</h1>
             <div className="profile-content">

@@ -26,6 +26,7 @@ class AuthUser extends React.Component {
         console.log("Авторизация успешна:", response.data);
 
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("email", email);
 
         const role = response.data.role;
         if (role === "Organisation") {

@@ -7,34 +7,61 @@ class OrganisationProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: true,
       title: "",
+      isEditing: false,
     };
   }
 
   componentDidMount() {
-    const token = localStorage.getItem("token");
 
-    if (!token) {
-      this.setState({ isLoggedIn: false });
-      return;
-    }
+    this.fetchProfile();
+  }
 
+  fetchProfile = () => {
     axiosInstance.get('/organisation/profile')
       .then((response) => {
         const { title } = response.data;
         this.setState({ title });
       })
       .catch((error) => {
-        console.error('Ошибка при загрузке профиля организации:', error.response?.data?.message || error.message);
+        console.error('Ошибка при загрузке профиля компании:', error.response?.data?.message || error.message);
       });
-  }
+  };
+
+  handleEditToggle = () => {
+    this.setState((prevState) => ({ isEditing: !prevState.isEditing }));
+  };
+
+  handleInputChange = (field, value) => {
+    this.setState({ [field]: value });
+  };
+
+  handleSave = () => {
+    const { title } = this.state;
+
+    axiosInstance.put('/organisation/update-profile', { title })
+      .then(() => {
+        this.setState({ isEditing: false });
+        this.fetchProfile();
+      })
+      .catch((error) => {
+        console.error("Ошибка при сохранении изменений:", error);
+      });
+  };
+
+  handleDelete = () => {
+    axiosInstance.delete('/organisation/delete-account')
+      .then(() => {
+        localStorage.clear();
+        this.props.navigate("/");
+      })
+      .catch((error) => {
+        console.error("Ошибка при удалении аккаунта:", error);
+      });
+  };
 
   render() {
-    if (!this.state.isLoggedIn) {
-      this.props.navigate("/");
-    }
-
+    const { title, isEditing } = this.state;
     return (
       <div className="creating-page">
         <header className="main-header"></header>
@@ -46,9 +73,27 @@ class OrganisationProfile extends React.Component {
               <div className="profile-fields">
                 <div className="field">
                   <label>Название компании:</label>
-                  <span>{this.state.title || "Не указано"}</span>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      value={title}
+                      onChange={(e) => this.handleInputChange("title", e.target.value)}
+                    />
+                  ) : (
+                    <span>{title || "Не указано"}</span>
+                  )}
                 </div>
               </div>
+              {isEditing && (
+                <div className="edit-actions">
+                  <button className="save-button" onClick={this.handleSave}>Сохранить</button>
+                  <button className="delete-button" onClick={this.handleDelete}>Удалить аккаунт</button>
+                </div>
+              )}
+              <button className="edit-button" onClick={this.handleEditToggle}>
+                {isEditing ? "Отменить" : "Редактировать"}
+              </button>
+              
             </div>
           </div>
         </div>

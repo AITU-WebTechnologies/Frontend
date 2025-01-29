@@ -8,9 +8,9 @@ class CheckerProfile extends React.Component {
     super(props);
     this.state = {
       isLoggedIn: true,
-      userName: "",
       firstName: "",
       lastName: "",
+      isEditing: false,
     };
   }
 
@@ -23,18 +23,52 @@ class CheckerProfile extends React.Component {
     }
 
     axiosInstance.get('/checker/profile')
-    .then((response) => {
-      const { firstName, lastName } = response.data;
-      this.setState({ userName: `${firstName} ${lastName}`, firstName, lastName });
-    })
-    .catch((error) => {
-      console.error('Ошибка при загрузке профиля пользователя:', error.response?.data?.message || error.message);
-    });
+      .then((response) => {
+        const { firstName, lastName } = response.data;
+        this.setState({ firstName, lastName });
+      })
+      .catch((error) => {
+        console.error('Ошибка при загрузке профиля пользователя:', error.response?.data?.message || error.message);
+      });
   }
 
+  handleEditToggle = () => {
+    this.setState((prevState) => ({ isEditing: !prevState.isEditing }));
+  };
+
+  handleInputChange = (field, value) => {
+    this.setState({ [field]: value });
+  };
+
+  handleSave = () => {
+    const { firstName, lastName } = this.state;
+
+    axiosInstance.put('/checker/update-profile', { firstName, lastName })
+      .then(() => {
+        this.setState({ isEditing: false });
+      })
+      .catch((error) => {
+        console.error("Ошибка при сохранении изменений:", error);
+      });
+  };
+
+  handleDelete = () => {
+    axiosInstance.delete('/checker/delete-account')
+      .then(() => {
+        localStorage.clear();
+        this.props.navigate("/");
+      })
+      .catch((error) => {
+        console.error("Ошибка при удалении аккаунта:", error);
+      });
+  };
+
   render() {
-    if (!this.state.isLoggedIn) {
+    const { isLoggedIn, firstName, lastName, isEditing } = this.state;
+
+    if (!isLoggedIn) {
       this.props.navigate("/");
+      return null;
     }
 
     return (
@@ -48,13 +82,38 @@ class CheckerProfile extends React.Component {
               <div className="profile-fields">
                 <div className="field">
                   <label>Имя:</label>
-                  <span>{this.state.firstName || "Не указано"}</span>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      value={firstName}
+                      onChange={(e) => this.handleInputChange("firstName", e.target.value)}
+                    />
+                  ) : (
+                    <span>{firstName || "Не указано"}</span>
+                  )}
                 </div>
                 <div className="field">
                   <label>Фамилия:</label>
-                  <span>{this.state.lastName || "Не указано"}</span>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      value={lastName}
+                      onChange={(e) => this.handleInputChange("lastName", e.target.value)}
+                    />
+                  ) : (
+                    <span>{lastName || "Не указано"}</span>
+                  )}
                 </div>
               </div>
+              <button className="edit-button" onClick={this.handleEditToggle}>
+                {isEditing ? "Отменить" : "Редактировать"}
+              </button>
+              {isEditing && (
+                <div className="edit-actions">
+                  <button className="save-button" onClick={this.handleSave}>Сохранить</button>
+                  <button className="delete-button" onClick={this.handleDelete}>Удалить аккаунт</button>
+                </div>
+              )}
             </div>
           </div>
         </div>

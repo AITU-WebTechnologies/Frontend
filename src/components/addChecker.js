@@ -52,10 +52,8 @@ class AddChecker extends React.Component {
     axiosInstance
       .post("/checker/create-checker", { name, surname, email, role, password })
       .then((response) => {
-        console.log("Проверяющий создан:", response.data);
-
+        
         localStorage.setItem("email", email);
-        localStorage.setItem("token", response.data.token);
 
         this.props.navigate("/verify-checker");
       })

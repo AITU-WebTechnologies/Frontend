@@ -16,10 +16,17 @@ class Verification extends React.Component {
     
         axiosInstance.post('/checker/confirm-checker', { email, code })
             .then(response => {
-                console.log('Verification successful', response.data);
-                localStorage.setItem('token', response.data.token);
 
-                this.props.navigate('/checker-events');
+                const token = response.data.accessToken; 
+            if (token) {
+                localStorage.setItem('token', token);
+
+            
+                this.props.navigate('/checker-events'); 
+            } else {
+                console.error('accessToken отсутствует в ответе сервера.');
+                this.setState({ error: 'Ошибка получения токена. Попробуйте снова.' });
+            }
                 
             })
             .catch(error => {

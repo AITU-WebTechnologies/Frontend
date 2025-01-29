@@ -1,6 +1,7 @@
 import React from "react";
 import withNavigation from "../utils/withNavigation";
 import axiosInstance from "../configurations/instance";
+import { jwtDecode } from "jwt-decode";
 
 class AuthUser extends React.Component {
   constructor(props) {
@@ -9,7 +10,33 @@ class AuthUser extends React.Component {
       email: "",
       password: "",
       error: "",
+      isRedirecting: false, 
     };
+  }
+
+  componentDidMount() {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        const { role } = decodedToken;
+
+        if (role === "Organisation" || role === "Checker") {
+          this.setState({ isRedirecting: true }, () => {
+            if (role === "Organisation") {
+              this.props.navigate("/profile-org");
+            } else if (role === "Checker") {
+              this.props.navigate("/profile-checker");
+            }
+          });
+        } else {
+          console.error("Неизвестная роль:", role);
+        }
+      } catch (error) {
+        console.error("Ошибка при декодировании токена:", error);
+      }
+    }
   }
 
   handleLogin = () => {
@@ -24,8 +51,8 @@ class AuthUser extends React.Component {
       .post("/auth/check-user", { email, password })
       .then((response) => {
         console.log("Авторизация успешна:", response.data);
-
-        localStorage.setItem("token", response.data.token);
+        console.log("token", response.data.accessToken);
+        localStorage.setItem("token", response.data.accessToken);
         localStorage.setItem("email", email);
 
         const role = response.data.role;
@@ -52,7 +79,11 @@ class AuthUser extends React.Component {
   };
 
   render() {
-    const { email, password, error } = this.state;
+    const { email, password, error, isRedirecting } = this.state;
+
+    if (isRedirecting) {
+      return null; 
+    }
 
     return (
       <div className="auth-container">

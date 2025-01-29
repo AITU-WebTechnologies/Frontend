@@ -21,6 +21,7 @@ class LeftSlidebar extends React.Component {
             case 'logout':
                 localStorage.removeItem('token');
                 localStorage.removeItem('email');
+                localStorage.clear();
                 this.props.navigate('/');
                 break;
             default:

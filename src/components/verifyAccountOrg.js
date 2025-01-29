@@ -17,11 +17,10 @@ class VerificationOrg extends React.Component {
     axiosInstance
       .post('/organisation/confirm-org', { email, code })
       .then(response => {
-        console.log('Verification successful:', response.data);
 
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('token', response.data.accessToken);
 
-        this.props.navigate('/event-creation');
+        this.props.navigate('/profile-org');
       })
       .catch(error => {
         console.error('Verification failed:', error);

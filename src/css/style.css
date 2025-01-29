@@ -875,3 +875,79 @@ body {
 .reset-password-container form label{
   margin-top: 30px;
 }
+
+
+.profile-content {
+  background-color: #ffffff;
+  margin-top: 50px;
+  border: 1px solid #c1c1c1;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.profile-fields .field {
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 150px;
+}
+
+.field label {
+  font-weight: bold;
+  color: #333;
+}
+
+.field span, .field input {
+  font-size: 16px;
+  color: #555;
+  width: 60%;
+}
+
+.field input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.edit-button {
+  margin-left: 900px;
+  margin-top: 160px;
+}
+
+.save-button, .delete-button {
+  margin-top: 0px;
+}
+
+.edit-button, .save-button, .delete-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.save-button {
+  background-color: #28a745;
+}
+
+.delete-button {
+  background-color: #dc3545;
+}
+
+.edit-button:hover, .save-button:hover, .delete-button:hover {
+  opacity: 0.9;
+}
+
+.edit-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}

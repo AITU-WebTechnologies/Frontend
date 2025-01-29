@@ -2,7 +2,7 @@ import axios from 'axios';
 import DatabaseStatus from '../utils/DatabaseStatus';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:5000/api',
+    baseURL: 'http://localhost:6000/api',
     withCredentials: true,
 });
 
